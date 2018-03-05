@@ -5,7 +5,6 @@ let validateAlbum = payload => {
 
 export default (state=[], action) => {
   let {type, payload} = action
-  // validateAlbum(payload) // Reminder that we can't do this in every case, so it's situational.
 
   switch(type) {
     case 'ALBUM_SET': return payload
