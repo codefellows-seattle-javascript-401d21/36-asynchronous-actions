@@ -3,6 +3,7 @@ import {Provider} from 'react-redux'
 import Dashboard from './dashboard'
 import createStore from '../lib/store'
 import {BrowserRouter, Route} from 'react-router-dom'
+import AlbumForm from './album-create/album-create';
 
 let store = createStore()
 

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {
   albumFetchRequest,
   albumCreateRequest} from '../../actions/album-actions'
+import AlbumForm from '../album-create/album-create';
 
 class Dashboard extends React.Component {
   componentWillMount() {
@@ -12,8 +13,8 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-container">
-        <h1>Hello world - music things</h1>
-
+        <h1>Bill's music</h1>
+        <AlbumForm buttonText="create" create={this.props.createAlbum}/>
         {this.props.albums ?
           this.props.albums.map(album =>
             <div key={album._id}>
