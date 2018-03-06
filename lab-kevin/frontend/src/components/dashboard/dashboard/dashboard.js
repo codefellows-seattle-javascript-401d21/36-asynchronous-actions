@@ -1,11 +1,17 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import {DashNav} from '../';
-import {AlbumForm} from '../../album';
+import {AlbumForm, AlbumItem} from '../../album';
+import {albumCreateRequest} from '../../../actions/album-actions';
+import {connect} from 'react-redux';
 
 class Dashboard extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
   render(){
-    console.log('match path',this.props.match.path)
+    console.log('match path',this.props.match.path);
     return (
       <section className="dashboard-container">
         <h2>All the World&apos;s a Stage<span>--William Shakespeare</span></h2>
@@ -13,16 +19,17 @@ class Dashboard extends React.Component{
         <Route path={`${this.props.match.path}/generator`} render={() => {
           return (
             <section className='album-form-container'>
-              <AlbumForm onComplete={album => console.log(album)}
+              <AlbumForm onComplete={this.props.album_create}
                 buttonText="Generate"/>
             </section>
           );
         }} />
         <Route path={`${this.props.match.path}/oscillator`} render={()=> {
           return (
-            <span>
-            show albums
-            </span>
+            this.props.albums ? this.props.albums.map(album => (
+              <AlbumItem album={album} key={album._id} images={this.props.images[album._id]} />
+            )
+            ) : undefined
           );
         }} />
       </section>
@@ -30,4 +37,15 @@ class Dashboard extends React.Component{
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => (
+  {
+    albums: state.albums,
+    images: state.images,
+  }
+);
+
+const mapDispatchToProps = dispatch => ({
+  album_create: album => dispatch(albumCreateRequest(album)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
