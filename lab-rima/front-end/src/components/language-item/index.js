@@ -2,15 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {languageUpdate} from '../../action/language-action';
 import {bookCreate, bookDelete} from '../../action/book-action';
+import {languageUpdateRequest} from '../../action/language-action';
+import {
+  bookCreateRequest,
+  bookDeleteRequest} from '../../action/book-action';
 import LanguageForm from '../language-form/index';
 import BookForm from '../book-form/index';
 import BookItem from '../book-item/index';
 import {renderIf} from '../../lib/utils';
 
-
 class LanguageItem extends React.Component{
   constructor(props){
     super(props);
+console.log(this.props.books);
 
     this.state = {
       editing: false,
@@ -58,7 +62,7 @@ class LanguageItem extends React.Component{
           editing={this.handleGetSetState()}
           language={this.props.languageItem}
           buttonText="update"
-          onComplete={this.props.languageItemLanguageUpdate} />
+          onComplete={this.props.languageUpdate} />
       )}
 
       <section>
@@ -66,15 +70,15 @@ class LanguageItem extends React.Component{
         <BookForm
           languageId={this.props.languageItem.id}
           buttonText='create'
-          onComplete={this.props.languageItemBookCreate} />
+          onComplete={this.props.bookCreate} />
 
         <ul>
           {
-            this.props.books[this.props.languageItem.id].map(bookItem => {
+            this.props.languageItem.books.map(bookItem => {
               return <BookItem
                 key={bookItem.id}
                 bookItem={bookItem}
-                onClick={this.props.languageItemBookDelete} />;
+                onClick={this.props.bookDelete} />;
             })
           }
         </ul>
@@ -89,9 +93,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  languageItemLanguageUpdate: language => dispatch(languageUpdate(language)),
-  languageItemBookCreate: book => dispatch(bookCreate(book)),
-  languageItemBookDelete: book => dispatch(bookDelete(book)),
+  languageUpdate: language => dispatch(languageUpdateRequest(language)),
+  bookCreate: book => dispatch(bookCreateRequest(book)),
+  bookDelete: book => dispatch(bookDeleteRequest(book)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LanguageItem);

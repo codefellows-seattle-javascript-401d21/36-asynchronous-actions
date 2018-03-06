@@ -1,4 +1,3 @@
-//import uuid from 'uuid/v4';
 import superagent from 'superagent';
 import {logError} from '../lib/utils';
 
@@ -8,9 +7,6 @@ export const languageSet = languages => ({
 });
 
 export const languageCreate = language => {
-  //language.id = uuid();
-  //language.timestamp = new Date();
-
   return {
     type: 'LANGUAGE_CREATE',
     payload: language,
@@ -40,7 +36,7 @@ export const languageCreateRequest = language => (dispatch, getState) => {
     .catch(logError);
 }
 
-export const languageUpdateRequest = language => dispatch => {
+export const languageUpdateRequest = language => (dispatch, getState) => {
   return superagent.put(`${__API_URL__}/api/v1/language/${language.id}`)
     .send({ name: `${language.name}` })
     .then(res => dispatch(languageUpdate(res.body)))

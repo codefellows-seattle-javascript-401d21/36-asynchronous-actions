@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config({path: `${__dirname}/.dev.env`});
+require('dotenv').config();
 let production = process.env.NODE_ENV === 'production';
 
 
@@ -15,7 +15,10 @@ let plugins = [
   new HtmlPlugin(),
   new ExtractTextPlugin('bundle-[hash].css'),
   new EnvironmentPlugin(['NODE_ENV']),
-  new DefinePlugin({__DEBUG__: JSON.stringify(!production)}),
+  new DefinePlugin({
+    __DEBUG__: JSON.stringify(!production),
+    __API_URL__: JSON.stringify(process.env.API_URL),
+  }),
 ];
 
 if(production){
@@ -34,7 +37,7 @@ module.exports = {
   output: {
     path: `${__dirname}/build`,
     filename: 'bundle-[hash].js',
-    publicPath: '/',
+    publicPath: process.env.CDN_URL,
   },
 
   plugins,

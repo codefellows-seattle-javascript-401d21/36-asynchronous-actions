@@ -1,11 +1,7 @@
-//import uuid from 'uuid/v4';
 import superagent from 'superagent';
-import {logError} form '../lib/utils';
+import {logError} from '../lib/utils';
 
 export const languageCreate = language => {
-  //language.id = uuid();
-  //language.timestamp = new Date();
-
   return {
     type: 'LANGUAGE_CREATE',
     payload: language,
@@ -23,9 +19,6 @@ export const bookSet = books => ({
 });
 
 export const bookCreate = book => {
-  //book.id = uuid();
-  //book.timestamp = new Date();
-
   return {
     type: 'BOOK_CREATE',
     payload: book,
@@ -55,7 +48,7 @@ export const bookCreateRequest = book => (dispatch, getState) => {
     .catch(logError);
 }
 
-export const bookUpdateRequest = book => dispatch => {
+export const bookUpdateRequest = book => (dispatch, getState) => {
   return superagent.put(`${__API_URL__}/api/v1/book/${book.id}`)
     .send({ title: `${book.title}`, author: `${book.author}` })
     .then(res => dispatch(bookUpdate(res.body)))

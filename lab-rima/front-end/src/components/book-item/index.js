@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bookUpdate} from '../../action/book-action';
+import {bookUpdateRequest} from '../../action/book-action';
 import BookForm from '../book-form/index';
 import {renderIf} from '../../lib/utils';
-
 
 class BookItem extends React.Component{
   constructor(props){
@@ -55,7 +55,7 @@ class BookItem extends React.Component{
           editing={this.handleGetSetState()}
           book={this.props.bookItem}
           buttonText="update"
-          onComplete={this.props.bookItemBookUpdate} />
+          onComplete={this.props.bookUpdate} />
       )}
     </li>;
   }
@@ -67,7 +67,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  bookItemBookUpdate: book => dispatch(bookUpdate(book)),
+  bookUpdate: book => dispatch(bookUpdateRequest(book)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookItem);

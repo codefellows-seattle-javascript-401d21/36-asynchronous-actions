@@ -2,12 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {languageCreate, languageDelete} from '../../action/language-action';
 import {languageFetchAllRequest, languageCreateRequest, languageDeleteRequest} from '../../action/language-action';
+import {bookFetchAllRequest} from '../../action/book-action';
 import LanguageForm from '../language-form/index';
 import LanguageItem from '../language-item/index';
 
 class Dashboard extends React.Component{
-  componentWillMount(){
-    this.props.fetchAllLanguages();
+  componentDidMount(){
+    this.props.fetchAllLanguages().then(languages =>
+      this.setState({'languages': languages}));
+    this.props.fetchAllBooks().then(books =>
+      this.setState({'books': books}));
   }
 
   render(){
@@ -41,6 +45,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, getState) => ({
   fetchAllLanguages: () => dispatch(languageFetchAllRequest()),
+  fetchAllBooks: () => dispatch(bookFetchAllRequest()),
   createLanguage: language => dispatch(languageCreateRequest(language)),
   deleteLanguage: language => dispatch(languageDeleteRequest(language)),
 });
