@@ -1,17 +1,17 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import {configure, shallow, mount} from 'enzyme';
-import CategoryFrom from '../components/category/category-form/index';
+import ExpenseForm from '../components/cat/cat-form/index';
 require('jest');
 
 configure({adapter: new Adapter()});
 
 describe('<CategoryFrom />', function() {
   describe('shallow Mounting', function() {
-    beforeAll(() => this.wrapper = shallow(<CategoryFrom />));
+    beforeAll(() => this.wrapper = shallow(<ExpenseForm />));
     afterAll(() => this.wrapper.unmount());
 
-    it('should render a category form compenent', () => {
+    it('should render a expense form compenent', () => {
       expect(this.wrapper.length).toBe(1);
       expect(this.wrapper.find('.input-area').length).toBe(1);
     });
@@ -27,7 +27,7 @@ describe('<CategoryFrom />', function() {
 
   describe('Full Mounting', function() {
     beforeAll(() => {
-      this.wrapper = shallow(<CategoryFrom />);
+      this.wrapper = shallow(<ExpenseForm />);
       this.wrapper.setProps({onComplete: jest.fn()});
     });
     afterAll(() => this.wrapper.unmount());

@@ -1,5 +1,20 @@
 # LAB 36: Budget Tracker Continued
 
+## Configureation
+Create a `.env` file in the `back-end` file and configure it with the following enviroment variables 
+```
+PORT = 3000
+NODE_ENV = "test"
+MONGODB_URI = mongodb://localhost/cat
+```
+
+Create a `.dev.env` file in the `front-end` file and configure it with the following enviroment variables 
+```
+NODE_ENV="dev"
+API_URL="http://localhost:3000"
+CDN_URL="/"
+```
+
 ---
 ### Installing and How to use.
 
@@ -36,10 +51,10 @@ next you need to have these scripts adjusted in your package.json file.
 from there, you can go to your terminal and on 3 different tabs type, 
 
 ```javascript
-node run start-db
+npm run start-db
 ```
 ```javascript
-node run watch
+npm run watch
 ```
 ```javascript
 nodemon index.js

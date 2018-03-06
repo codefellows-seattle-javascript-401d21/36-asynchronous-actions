@@ -50,13 +50,8 @@ export const catDeleteRequest = cat => (dispatch, getState) => {
 };
 
 export const catUpdateRequest = cat => (dispatch, getState) => {
-  return superagent.put(`${__API_URL__}/api/v1/cat`)
-    .send({
-      name: cat.name,
-      color: cat.color,
-      age: cat.age,
-      owner: cat.ownerId,
-    })
+  return superagent.put(`${__API_URL__}/api/v1/cat/${cat._id}`)
+    .send(cat)
     .then(res => dispatch(catUpdate(cat)))
     .catch(logError);
 };

@@ -1,4 +1,4 @@
-import * as actions from '../actions/category-actions';
+import * as actions from '../actions/owner-actions';
 require('jest');
 
 describe('category actions', () => {
