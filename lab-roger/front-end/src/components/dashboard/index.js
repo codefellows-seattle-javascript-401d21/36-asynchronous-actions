@@ -7,6 +7,7 @@ import {
 class Dashboard extends React.Component {
   componentWillMount() {
     this.props.fetchAlbums();
+    console.log('props', this.props)
   }
 
   render() {

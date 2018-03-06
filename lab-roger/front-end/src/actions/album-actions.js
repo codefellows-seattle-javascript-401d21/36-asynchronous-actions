@@ -1,6 +1,7 @@
 import superagent from 'superagent';
 import {logError} from '../lib/utils';
-const __API_URL__ = process.env.__API_URL__;
+// require('dotenv');
+const __API_URL__ = 'http://localhost:3000';
 
 export const albumSet = albums => ({
   type: 'ALBUM_SET',
@@ -23,13 +24,14 @@ export const albumDelete = album => ({
 });
 
 export const albumFetchRequest = () => dispatch => {
-  return superagent.get(`${__API_URL__}/api/v1/alubum`)
+  console.log('api', `${__API_URL__}/api/v1/album`);
+  return superagent.get(`${__API_URL__}/api/v1/album`)
     .then(res => dispatch(albumSet(res.body)))
     .catch(logError);
 };
 
 export const albumCreateRequest = album => dispatch => {
-  return superagent.post(`${__API_URL__}/api/v1/alubum`)
+  return superagent.post(`${__API_URL__}/api/v1/album`)
     .send(album)
     .then(res => dispatch(albumSet(res.body)))
     .catch(logError);

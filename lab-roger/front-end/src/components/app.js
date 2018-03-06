@@ -6,7 +6,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 
 let store = createStore();
 
-class App extends React.COmponent {
+class App extends React.Component {
   render() {
     return (
       <main>
