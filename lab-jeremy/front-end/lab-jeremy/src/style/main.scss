@@ -1,0 +1,106 @@
+/* App styles */
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: rgb(0, 13, 128);
+$secondary-color: white;
+$tertiary-color: black;
+
+body {
+  font: 100% $font-stack;
+  background: $tertiary-color;
+  background-image: url("http://architectureimg.com/wp-content/uploads/2016/08/skyscrapers-stormy-seattle-dark-storm-desktop-backgrounds.jpg");
+}
+
+h1 {
+  text-align: center;
+  color: $primary-color;
+  font-size: 50px;
+}
+
+div {
+  text-align: center;
+  font-size: 18px;
+  color: $secondary-color;
+}
+
+ul {
+  li {
+    border-top-right-radius: 15%;
+    border-bottom-left-radius: 15%;
+    padding: 10px;
+    border: 2px solid $secondary-color; 
+    margin: 10px;
+    display: inline-block;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+h1 {
+  color: white;
+  text-shadow: 1px 1px 2px $primary-color, 0 0 25px $primary-color, 0 0 5px $primary-color;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg);
+  transition: transform 2s ease;
+
+  &:hover {
+    transform-style: preserve-3d;
+    transform: rotateX(360deg);
+    transition: transform 2s ease;
+  }
+}
+
+.season-item {
+  border: 2px solid $secondary-color;
+  border-radius: 3px;
+  margin: 10px;
+  background: radial-gradient($primary-color, $tertiary-color);
+}
+
+.season-item {
+  p:first-of-type {
+    border-bottom: 1px dashed $secondary-color;
+  }
+}
+
+input {
+  border-radius: 3px;
+  background: $tertiary-color;
+  color: $secondary-color;
+  margin: 5px;
+
+  &:focus {
+    border: 3px solid $primary-color;
+    transition: 350ms all;
+  }
+
+  &:hover {
+    border: 1px solid $primary-color;
+    transition: 350ms all;
+  }
+}
+
+button {
+  background: $tertiary-color;
+  color: $secondary-color;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  margin: 2px;
+  padding: 5px;
+  transition: 150ms all;
+
+  &:hover {
+    color: $primary-color;
+    transition: 150ms all;
+  }
+}
+
+.negative {
+  color: red;
+}
+
+.positive {
+  color: green;
+}
