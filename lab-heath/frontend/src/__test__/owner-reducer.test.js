@@ -1,4 +1,4 @@
-import reducer from '../reducers/category';
+import reducer from '../reducers/owner';
 require('jest');
 
 describe('category reducer', () => {

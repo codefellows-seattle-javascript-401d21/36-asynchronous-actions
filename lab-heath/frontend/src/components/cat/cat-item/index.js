@@ -51,7 +51,7 @@ class CatItem extends React.Component{
 
           <p>name: {this.props.cats.name}</p>
           <p>age: {this.props.cats.age}</p>
-          <p>color: ${this.props.cats.color}</p>
+          <p>color: {this.props.cats.color}</p>
           <button
             className='delete_btn'
             type='button'

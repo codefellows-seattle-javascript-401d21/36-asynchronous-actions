@@ -26,8 +26,8 @@ describe('GET /api/v1/cat', function () {
       return superagent.get(`:4000/api/v1/cat`)
         .then(res => {
           expect(res.body).toBeInstanceOf(Array);
-          expect(res.body[0]).toMatch(/[A-Za-z0-9]{24}/);
-          expect(res.body[4]).toMatch(/[A-Za-z0-9]{24}/);
+          expect(res.body[0]._id).toMatch(/[A-Za-z0-9]{24}/);
+          expect(res.body[4]._id).toMatch(/[A-Za-z0-9]{24}/);
         });
     });
     it('should return a status 200', () => {

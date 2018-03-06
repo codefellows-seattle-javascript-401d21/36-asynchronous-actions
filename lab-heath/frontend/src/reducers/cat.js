@@ -35,7 +35,6 @@ export default (state={}, action) => {
 
   case 'CAT_DELETE': 
     // checker(payload);
-    console.log('inside', payload);
     ownerId = payload.owner;
     ownerCat = state[ownerId];
     updatedOwner = ownerCat.filter(cat => cat._id !== payload._id);

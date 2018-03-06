@@ -22,8 +22,12 @@ describe('PUT /api/v1/cat', function () {
 
   describe('Valid req/res', () => {
     beforeAll(() => {
+      console.log('##########', this.cat);
       return superagent.put(`:4000/api/v1/cat/${this.cat._id}`)
-        .send({name: 'tiger'})
+        .send({
+          name: 'tiger',
+          color: 'red',
+        })
         .then(res => this.res = res);
     });
 
@@ -31,7 +35,7 @@ describe('PUT /api/v1/cat', function () {
       expect(this.res.status).toBe(204);
     });
     it('should update the make to cat in the database', () => {
-      return superagent.get(`:4000/api/v1/bike/${this.cat._id}`)
+      return superagent.get(`:4000/api/v1/cat/${this.cat._id}`)
         .then(res => expect(res.body.name).toBe('tiger'));
     });
     it('should have the same id', () => {

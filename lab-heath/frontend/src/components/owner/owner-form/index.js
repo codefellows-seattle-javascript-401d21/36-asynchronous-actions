@@ -4,8 +4,8 @@ import { renderIf } from '../../../lib/utils';
 class OwnerForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.owner
-      ? this.props.owner
+    this.state = this.props.owners
+      ? this.props.owners
       : {
         name: '',
         updating: false,

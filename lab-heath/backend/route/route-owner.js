@@ -31,7 +31,6 @@ module.exports = function(router) {
     })
 
     .delete((req, res) => {
-      console.log('this is req', req.params._id);
       Owner.findByIdAndRemove(req.params._id)
         .then(() => res.sendStatus(204))
         .catch(err => errorHandler(err, res)); 
