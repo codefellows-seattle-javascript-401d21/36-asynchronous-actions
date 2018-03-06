@@ -19,6 +19,8 @@ export default (state={}, action) => {
     delete languageDeletedState[payload.id];
     return languageDeletedState;
   }
+  case 'BOOK_SET':
+    return payload;
   case 'BOOK_CREATE': {
     if(!payload.id || payload.id.trim().length === 0){
       throw new Error('BOOK REDUCER: Book ID must be present.');

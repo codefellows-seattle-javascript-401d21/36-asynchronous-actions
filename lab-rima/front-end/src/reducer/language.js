@@ -2,6 +2,8 @@ export default (state=[], action) => {
   let {type, payload} = action;
 
   switch(type){
+  case 'LANGUAGE_SET':
+    return payload;
   case 'LANGUAGE_CREATE':
     if(payload.name.trim().length === 0){
       throw new Error('Language name cannot be empty.');

@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {languageCreate, languageDelete} from '../../action/language-action';
+import {languageFetchAllRequest, languageCreateRequest, languageDeleteRequest} from '../../action/language-action';
 import LanguageForm from '../language-form/index';
 import LanguageItem from '../language-item/index';
 
-
 class Dashboard extends React.Component{
+  componentWillMount(){
+    this.props.fetchAllLanguages();
+  }
 
   render(){
     return(
@@ -14,7 +17,7 @@ class Dashboard extends React.Component{
 
         <LanguageForm
           buttonText='create'
-          onComplete={this.props.dashboardLanguageCreate} />
+          onComplete={this.props.createLanguage} />
 
         <ul>
           {
@@ -22,7 +25,7 @@ class Dashboard extends React.Component{
               return <LanguageItem 
                 key={languageItem.id}
                 languageItem={languageItem}
-                onClick={this.props.dashboardLanguageDelete} />;
+                onClick={this.props.deleteLanguage} />;
             })
           }
         </ul>
@@ -37,8 +40,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  dashboardLanguageCreate: language => dispatch(languageCreate(language)),
-  dashboardLanguageDelete: language => dispatch(languageDelete(language)),
+  fetchAllLanguages: () => dispatch(languageFetchAllRequest()),
+  createLanguage: language => dispatch(languageCreateRequest(language)),
+  deleteLanguage: language => dispatch(languageDeleteRequest(language)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
