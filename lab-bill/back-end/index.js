@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-require('dotenv').config()
+require('dotenv').config();
 
-const debug = require('debug')('http:index')
-require('./lib/server').start()
+const debug = require('debug')('http:index');
+require('./lib/server').start();
