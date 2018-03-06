@@ -1,10 +1,11 @@
-import React from 'react'
-import {Provider} from 'react-redux'
-import Dashboard from './dashboard'
-import createStore from '../lib/store'
-import {BrowserRouter, Route} from 'react-router-dom'
+import React from 'react';
+import {Provider} from 'react-redux';
+import Dashboard from './dashboard';
+import createStore from '../lib/store';
+import {BrowserRouter, Route} from 'react-router-dom';
+import AlbumForm from './album-form/index';
 
-let store = createStore()
+let store = createStore();
 
 class App extends React.Component {
   render() {
@@ -16,8 +17,8 @@ class App extends React.Component {
           </BrowserRouter>
         </Provider>
       </main>
-    )
+    );
   }
 }
 
-export default App
+export default App;

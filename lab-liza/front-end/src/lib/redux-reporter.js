@@ -1,14 +1,14 @@
-import {log, logError} from './utils'
+import {log, logError} from './utils';
 
 export default store => next => action => {
-  log('__ACTION__', action)
+  log('__ACTION__', action);
   try {
-    let result = next(action)
-    log('__STATE__', store.getState())
-    return result
+    let result = next(action);
+    log('__STATE__', store.getState());
+    return result;
   } catch(e) {
-    e.action = action
-    logError('__ERROR__', e)
-    return e
+    e.action = action;
+    logError('__ERROR__', e);
+    return e;
   }
-}
+};

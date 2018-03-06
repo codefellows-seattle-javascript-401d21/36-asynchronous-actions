@@ -1,5 +1,5 @@
-import {combineReducers} from 'redux'
-import albums from './album'
-import tracks from './track'
+import {combineReducers} from 'redux';
+import albums from './album';
+import tracks from './track';
 
-export default combineReducers({albums, tracks})
+export default combineReducers({albums, tracks});
