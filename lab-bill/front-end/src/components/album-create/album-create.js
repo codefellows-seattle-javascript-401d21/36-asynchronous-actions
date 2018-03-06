@@ -3,8 +3,8 @@ import React from 'react';
 class AlbumForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.album || this.props.track
-      ? this.props.album || this.props.track
+    this.state = this.props.album
+      ? this.props.album
       : {
         name: '',
       };

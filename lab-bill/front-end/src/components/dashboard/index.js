@@ -5,6 +5,7 @@ import {
   albumCreateRequest,
   albumDeleteRequest,
   albumUpdateRequest} from '../../actions/album-actions';
+import {trackFetchRequest} from '../../actions/track-actions'
 import { trackCreateRequest } from '../../actions/track-actions'
 import AlbumForm from '../album-create/album-create';
 import TrackForm from '../track-create/track-create';
@@ -12,6 +13,7 @@ import TrackForm from '../track-create/track-create';
 class Dashboard extends React.Component {
   componentWillMount() {
     this.props.fetchAlbums();
+    this.props.fetchTracks();
   }
 
   render() {
@@ -47,6 +49,7 @@ let mapStateToProps = state => ({
 
 let mapDispatchToProps = dispatch => ({
   fetchAlbums: () => dispatch(albumFetchRequest()),
+  fetchTracks: () => dispatch(trackFetchRequest()),
   createAlbum: album => dispatch(albumCreateRequest(album)),
   deleteAlbum: album => dispatch(albumDeleteRequest(album)),
   updateAlbum: album => dispatch(albumUpdateRequest(album)),
