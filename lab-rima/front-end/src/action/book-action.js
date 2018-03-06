@@ -39,24 +39,24 @@ export const bookFetchAllRequest = () => dispatch => {
   return superagent.get(`${__API_URL__}/api/v1/book`)
     .then(res => dispatch(bookSet(res.body)))
     .catch(logError);
-}
+};
 
 export const bookCreateRequest = book => (dispatch, getState) => {
   return superagent.post(`${__API_URL__}/api/v1/book`)
     .send(book)
     .then(res => dispatch(bookCreate(res.body)))
     .catch(logError);
-}
+};
 
 export const bookUpdateRequest = book => (dispatch, getState) => {
   return superagent.put(`${__API_URL__}/api/v1/book/${book.id}`)
     .send({ title: `${book.title}`, author: `${book.author}` })
     .then(res => dispatch(bookUpdate(res.body)))
     .catch(logError);
-}
+};
 
 export const bookDeleteRequest = book => (dispatch, getState) => {
   return superagent.del(`${__API_URL__}/api/v1/book/${book.id}`)
     .then(res => dispatch(bookDelete(res.body)))
     .catch(logError);
-}
+};

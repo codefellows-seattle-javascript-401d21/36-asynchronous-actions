@@ -14,7 +14,7 @@ import {renderIf} from '../../lib/utils';
 class LanguageItem extends React.Component{
   constructor(props){
     super(props);
-console.log(this.props.books);
+    console.log(this.props.books);
 
     this.state = {
       editing: false,
