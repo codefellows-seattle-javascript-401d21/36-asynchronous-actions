@@ -40,7 +40,7 @@ class BookItem extends React.Component{
 
   render(){
     return <li
-      key={this.props.bookItem.id}
+      key={this.props.bookItem._id}
     >
       <p onDoubleClick={this.handleDoubleClick}>{this.props.bookItem.title} by {this.props.bookItem.author}</p>
 

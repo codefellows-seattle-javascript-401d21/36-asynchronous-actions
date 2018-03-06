@@ -45,6 +45,7 @@ class LanguageItem extends React.Component{
   }
 
   render(){
+    const books = this.props.books.filter(book => book.language === this.props.languageItem._id);
     return <li
       key={this.props.key}
     >
@@ -73,11 +74,11 @@ class LanguageItem extends React.Component{
 
         <ul>
           {
-            this.props.books.map(bookItem => {
-              return <BookItem
-                key={bookItem.id}
-                bookItem={bookItem}
-                onClick={this.props.bookDelete} />;
+            books.map(bookItem => {
+                return <BookItem
+                  key={bookItem._id}
+                  bookItem={bookItem}
+                  onClick={this.props.bookDelete} />;
             })
           }
         </ul>

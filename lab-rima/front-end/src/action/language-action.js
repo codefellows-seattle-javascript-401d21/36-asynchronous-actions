@@ -37,14 +37,14 @@ export const languageCreateRequest = language => (dispatch, getState) => {
 };
 
 export const languageUpdateRequest = language => (dispatch, getState) => {
-  return superagent.put(`${__API_URL__}/api/v1/language/${language.id}`)
-    .send({ name: `${language.name}` })
-    .then(res => dispatch(languageUpdate(res.body)))
+  return superagent.put(`${__API_URL__}/api/v1/language/${language._id}`)
+    .send(language)
+    .then(() => dispatch(languageUpdate(language)))
     .catch(logError);
 };
 
 export const languageDeleteRequest = language => (dispatch, getState) => {
-  return superagent.del(`${__API_URL__}/api/v1/language/${language.id}`)
-    .then(res => dispatch(languageDelete(res.body)))
+  return superagent.del(`${__API_URL__}/api/v1/language/${language._id}`)
+    .then(() => dispatch(languageDelete(langauge)))
     .catch(logError);
 };

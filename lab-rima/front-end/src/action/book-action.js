@@ -1,7 +1,7 @@
 import superagent from 'superagent';
 import {logError} from '../lib/utils';
 
-export const languageCreate = language => {
+/*export const languageCreate = language => {
   return {
     type: 'LANGUAGE_CREATE',
     payload: language,
@@ -12,7 +12,7 @@ export const languageDelete = language => ({
   type: 'LANGUAGE_DELETE',
   payload: language,
 });
-
+*/
 export const bookSet = books => ({
   type: 'BOOK_SET',
   payload: books,
@@ -49,14 +49,14 @@ export const bookCreateRequest = book => (dispatch, getState) => {
 };
 
 export const bookUpdateRequest = book => (dispatch, getState) => {
-  return superagent.put(`${__API_URL__}/api/v1/book/${book.id}`)
-    .send({ title: `${book.title}`, author: `${book.author}` })
-    .then(res => dispatch(bookUpdate(res.body)))
+  return superagent.put(`${__API_URL__}/api/v1/book/${book._id}`)
+    .send(book)
+    .then(() => dispatch(bookUpdate(book)))
     .catch(logError);
 };
 
 export const bookDeleteRequest = book => (dispatch, getState) => {
-  return superagent.del(`${__API_URL__}/api/v1/book/${book.id}`)
-    .then(res => dispatch(bookDelete(res.body)))
+  return superagent.del(`${__API_URL__}/api/v1/book/${book._id}`)
+    .then(() => dispatch(bookDelete(book)))
     .catch(logError);
 };

@@ -7,11 +7,11 @@ import LanguageForm from '../language-form/index';
 import LanguageItem from '../language-item/index';
 
 class Dashboard extends React.Component{
-  componentDidMount(){
-    this.props.fetchAllLanguages().then(languages =>
-      this.setState({'languages': languages}));
-    this.props.fetchAllBooks().then(books =>
-      this.setState({'books': books}));
+  componentWillMount(){
+    this.props.fetchAllBooks();//.then(books =>
+      //this.setState({'books': books}));
+    this.props.fetchAllLanguages();//.then(languages =>
+      //this.setState({'languages': languages}));
   }
 
   render(){
