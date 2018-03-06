@@ -12,7 +12,10 @@ const {DefinePlugin, EnvironmentPlugin} = require('webpack');
 let plugins = [
   new HtmlPlugin({template: `${__dirname}/src/index.html`}),
   new ExtractTextPlugin('bundle-[hash].css'),
-  new DefinePlugin({__DEBUG__: JSON.stringify(!production)}),
+  new DefinePlugin({
+    __DEBUG__: JSON.stringify(!production),
+    __API_URL__: JSON.stringify(process.env.API_URL),
+  }),
   new EnvironmentPlugin(['NODE_ENV']),
 ];
 
