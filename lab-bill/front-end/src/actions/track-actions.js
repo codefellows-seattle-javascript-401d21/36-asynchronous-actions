@@ -21,4 +21,11 @@ export const trackDelete = track => ({
   payload: track,
 });
 
+export const trackCreateRequest = track => (dispatch, getState) => {
+  console.log(track)
+  return superagent.post(`${__API_URL__}/api/v1/track`)
+    .send(track)
+    .then(res => dispatch(trackCreate(res.body)))
+    .catch(logError);
+};
 

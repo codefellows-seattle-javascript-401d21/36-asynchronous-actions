@@ -3,8 +3,11 @@ import {connect} from 'react-redux';
 import {
   albumFetchRequest,
   albumCreateRequest,
-  albumDeleteRequest} from '../../actions/album-actions';
+  albumDeleteRequest,
+  albumUpdateRequest} from '../../actions/album-actions';
+import { trackCreateRequest } from '../../actions/track-actions'
 import AlbumForm from '../album-create/album-create';
+import TrackForm from '../track-create/track-create';
 
 class Dashboard extends React.Component {
   componentWillMount() {
@@ -21,6 +24,13 @@ class Dashboard extends React.Component {
             <div key={album._id}>
               <span onClick={() => this.props.deleteAlbum(album)}>x</span>
               <p>{album.name}</p>
+              <AlbumForm album={album} buttonText="update" update={this.props.updateAlbum}/>
+              <TrackForm album={album} buttonText="New Track" createTrack={this.props.createTrack}/>
+              {this.props.tracks[album._id] ? 
+                this.props.tracks[album._id].map(track => 
+                    <p key={track._id} >{track.title}</p> )
+                : undefined
+                }
             </div>)
           :
           undefined
@@ -32,12 +42,15 @@ class Dashboard extends React.Component {
 
 let mapStateToProps = state => ({
   albums: state.albums,
+  tracks: state.tracks
 });
 
 let mapDispatchToProps = dispatch => ({
   fetchAlbums: () => dispatch(albumFetchRequest()),
   createAlbum: album => dispatch(albumCreateRequest(album)),
   deleteAlbum: album => dispatch(albumDeleteRequest(album)),
+  updateAlbum: album => dispatch(albumUpdateRequest(album)),
+  createTrack: track => dispatch(trackCreateRequest(track)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

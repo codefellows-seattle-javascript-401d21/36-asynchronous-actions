@@ -1,6 +1,6 @@
 let validateTrack = payload => {
   if(!payload._id) throw new Error('VALIDATION ERROR. Track must have an ID');
-  if(!payload.name) throw new Error('VALIDATION ERROR. Track must have name');
+  // if(!payload.name) throw new Error('VALIDATION ERROR. Track must have name');
 };
 
 export default (state={}, action) => {
@@ -14,7 +14,8 @@ export default (state={}, action) => {
   case 'TRACK_GET': return payload;
   case 'TRACK_CREATE':
     validateTrack(payload);
-    state[payload._id] = state[payload._id].concat([payload]);
+    console.log(state,payload)
+    state[payload.album] = state[payload.album].concat([payload]);
     return {...state};
   case 'TRACK_UPDATE':
     validateTrack(payload);

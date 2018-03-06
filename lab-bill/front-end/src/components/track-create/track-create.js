@@ -1,12 +1,14 @@
 import React from 'react';
 
-class AlbumForm extends React.Component {
+class TrackForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = this.props.album || this.props.track
-      ? this.props.album || this.props.track
+    this.state = this.props.track
+      ? this.props.track
       : {
-        name: '',
+        title: '',
+        artist: '',
+        album: this.props.album._id
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +21,7 @@ class AlbumForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.props.buttonText === 'create') this.props.create(this.state);
+    if (this.props.buttonText === 'New Track') this.props.createTrack(this.state);
     if (this.props.buttonText === 'update') this.props.update(this.state);
     this.setState({
       name: '',
@@ -28,11 +30,17 @@ class AlbumForm extends React.Component {
 
   render() {
     return  (
-      <form className="album-form" onSubmit={this.handleSubmit}>
+      <form className="track-form" onSubmit={this.handleSubmit}>
         <input
           type="text"
-          name="name"
-          value={this.state.name}
+          name="title"
+          value={this.state.title}
+          onChange={this.handleChange}/>
+
+        <input
+          type="text"
+          name="artist"
+          value={this.state.artist}
           onChange={this.handleChange}/>
 
         <button type="submit">{this.props.buttonText}</button>
@@ -41,4 +49,4 @@ class AlbumForm extends React.Component {
   }
 }
 
-export default AlbumForm;
+export default TrackForm;

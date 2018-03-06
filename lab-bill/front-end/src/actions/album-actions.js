@@ -37,8 +37,15 @@ export const albumCreateRequest = album => (dispatch, getState) => {
 };
 
 export const albumDeleteRequest = album => (dispatch, getState) => {
-  // console.log(album)
   return superagent.delete(`${__API_URL__}/api/v1/album/${album._id}`)
     .then(res => dispatch(albumDelete(album)))
+    .catch(logError);
+};
+
+export const albumUpdateRequest = album => (dispatch, getState) => {
+  console.log(album)
+  return superagent.put(`${__API_URL__}/api/v1/album/${album._id}`)
+    .send(album)
+    .then(res => dispatch(albumUpdate(album)))
     .catch(logError);
 };
