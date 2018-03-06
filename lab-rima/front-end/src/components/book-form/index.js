@@ -4,7 +4,6 @@ import {renderIf} from '../../lib/utils';
 class BookForm extends React.Component{
   constructor(props){
     super(props);
-
     this.state = this.props.book ? this.props.book :
       {
         languageId: this.props.languageId,
@@ -33,6 +32,7 @@ class BookForm extends React.Component{
     this.props.onComplete(this.state);
 
     this.setState({
+      languageId: this.props.languageId,
       title: '',
       author: '',
     });
@@ -56,6 +56,11 @@ class BookForm extends React.Component{
         className="book-form"
         onSubmit={this.handleSubmit}
         id="book-form">
+
+        <input
+          name="languageId"
+          type="hidden"
+          value={this.state.languageId}/>
 
         <input
           className="title"

@@ -14,7 +14,6 @@ import {renderIf} from '../../lib/utils';
 class LanguageItem extends React.Component{
   constructor(props){
     super(props);
-    console.log(this.props.books);
 
     this.state = {
       editing: false,
@@ -68,13 +67,13 @@ class LanguageItem extends React.Component{
       <section>
 
         <BookForm
-          languageId={this.props.languageItem.id}
+          languageId={this.props.languageItem._id}
           buttonText='create'
           onComplete={this.props.bookCreate} />
 
         <ul>
           {
-            this.props.languageItem.books.map(bookItem => {
+            this.props.books.map(bookItem => {
               return <BookItem
                 key={bookItem.id}
                 bookItem={bookItem}
