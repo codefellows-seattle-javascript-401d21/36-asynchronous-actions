@@ -4,7 +4,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const debug = require('debug')('http:server');
+const debug = require('debug')('http:server'); // eslint-disable-line
 const errorHandler = require('./error-handler');
 
 // app setup
@@ -15,12 +15,12 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 // middleware
 app.use(cors());
-app.use('api/v1', router);
+app.use('/api/v1', router);
 require('../route/route-note')(router);
 require('../route/route-author')(router);
 
 // 404 error handler
-app.use('/{0,}', (req, res) => errorHandler(new Error('Path error. Route not found.'), res));
+app.use('/{0,}', (req, res) => errorHandler(new Error('404 path error. Route not found.'), res));
 
 // server controls
 let server = module.exports = {};

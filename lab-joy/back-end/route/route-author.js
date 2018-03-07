@@ -9,7 +9,6 @@ module.exports = function(router) {
     router.route('/author/:_id?')
         .get((req, res) => {
             debug(`${req.method}: ${req.url}`);
-            if (!req.params._id) errorHandler(new Error('Validation error: no ID, cannot get record.'));
 
             if (req.params._id) {
                 return Author.findById(req.params._id)
@@ -34,7 +33,10 @@ module.exports = function(router) {
             if (!req.params._id) errorHandler(new Error('Validation error: no ID, cannot update record.'));
 
             Author.findByIdAndUpdate(req.params._id, req.body, { upsert: true, runValidators: true })
-                .then(res => res.sendStatus(204))
+                .then(author => {
+                    res.sendStatus(204);
+                    return author;
+                })
                 .catch(err => errorHandler(err, res));
         })
 
@@ -44,7 +46,10 @@ module.exports = function(router) {
 
             Author.findById(req.params._id)
                 .then(author => author.remove())
-                .then(() => res.status(204))
+                .then(author => {
+                    res.sendStatus(204);
+                    return author;
+                })
                 .catch(err => errorHandler(err, res));
         });
 };

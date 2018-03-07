@@ -9,7 +9,6 @@ module.exports = router => {
     router.route('/note/:_id?')
         .get((req, res) => {
             debug(`${req.method}: ${req.url}`);
-            if (!req.params._id) errorHandler(new Error('Validation error: no ID, cannot get record.'));
 
             if (req.params._id) {
                 return Note.findById(req.params._id)
@@ -19,8 +18,8 @@ module.exports = router => {
             }
 
             Note.find()
-                .then(notes => notes.map(n => n._id))
-                .then(ids => res.status(200).json(ids))
+                // .then(notes => notes.map(n => n._id))
+                .then(notes => res.status(200).json(notes))
                 .catch(err => errorHandler(err, res));
         })
 

@@ -1,9 +1,9 @@
 import superagent from 'superagent';
 import { logError } from '../lib/utils';
-const __API_URL__ = `:3000`;
+const __API_URL__ = `http://localhost:3000`;
 
 // action creators
-export const authorSet = authors => ({
+export const authorGet = authors => ({
   type: 'AUTHOR_SET',
   payload: authors,
 });
@@ -26,7 +26,7 @@ export const authorDelete = author => ({
 // async actions
 export const authorFetchRequest = () => dispatch => {
   return superagent.get(`${__API_URL__}/api/v1/author`)
-    .then(res => dispatch(authorSet(res.body)))
+    .then(res => dispatch(authorGet(res.body)))
     .catch(logError);
 };
 
@@ -37,3 +37,19 @@ export const authorCreateRequest = author => (dispatch, getState) => {
     .catch(logError);
 };
 
+export const authorUpdateRequest = author => dispatch => {
+  return superagent.put(`${__API_URL__}/api/v1/author/${author._id}`)
+    .send(author)
+    .then(() => dispatch(authorUpdate(author)))
+    .catch(logError);
+};
+
+export const authorDeleteRequest = author => (dispatch) => {
+  console.log('1: ', author);
+  return superagent.delete(`${__API_URL__}/api/v1/author/${author._id}`)
+    .then(() => {
+      console.log('2: ', author);
+      dispatch(authorDelete(author));
+    })
+    .catch(logError);
+};

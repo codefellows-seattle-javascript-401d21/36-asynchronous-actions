@@ -1,6 +1,6 @@
 let validateNote = payload => {
   if (!payload._id) throw new Error('VALIDATION ERROR. Note must have an ID');
-  if (!payload.name) throw new Error('VALIDATION ERROR. Note must have name');
+  if (!payload.title) throw new Error('VALIDATION ERROR. Note must have title');
 };
 
 export default (state = {}, action) => {
