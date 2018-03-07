@@ -6,6 +6,20 @@ This project connects a front-end, built with React and Redux with aback-end, bu
 ### Installation & Set-Up
 Fork this repository and install on your machine using git clone. Switch to the lab-karen folder.
 
+### .env files
+front-end:
+.dev.env
+```
+NODE_ENV="dev"
+API_URL="http://localhost:3000"
+CDN_URL="/"
+```
+back-end:
+.env
+```PORT=3000
+MONGODB_URI='mongodb://localhost/books'
+```
+
 ### FRONT-END
 Navigate to the front-end folder.  The following excerpt from the FRONT-END package.json file shows the required package dependencies. Install devDependencies with *npm i*.
 ```
