@@ -12,8 +12,8 @@
 ## Requirements
 #### Configuration
 
-##### back-end/
-* copy your lab-14 or comparable api into into a back-end directory
+##### backend/
+* copy your lab-14 or comparable api into into a backend directory
 
 ##### frontend/
 * **README.md** -- with documentation about your lab
@@ -39,7 +39,7 @@
   * Use react/redux best practices
   * Add validation in your redux routers
   * Add reporter and thunk middleware to your redux store
-  * make async action creators for making ajax request to your back-end
+  * make async action creators for making ajax request to your backend
   * make sync action creators from updating your app store
 
 #### Test
