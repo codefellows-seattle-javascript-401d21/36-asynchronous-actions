@@ -7,7 +7,7 @@ const debug = require('debug')('http:model-note'); // eslint-disable-line
 const Note = mongoose.Schema({
     'title': { type: String, require: true },
     'content': { type: String, require: true },
-    'important': { type: Boolean },
+    'important': { type: String },
     'author': { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'author' },
 }, { timestamps: true });
 
@@ -19,16 +19,6 @@ Note.pre('save', function(next) {
         })
         .then(next)
         .catch(() => next(new Error('Validation Error. Failed to save note because author does not exist.')));
-});
-
-Note.post('remove', function(doc, next) {
-    Author.findById(doc.authorType)
-        .then(author => {
-            author.notes = author.notes.filter(e => e.toString() !== doc._id.toString());
-            return author.save();
-        })
-        .then(next)
-        .catch(next);
 });
 
 module.exports = mongoose.model('note', Note);

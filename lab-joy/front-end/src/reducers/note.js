@@ -5,25 +5,19 @@ let validateNote = payload => {
 
 export default (state = {}, action) => {
   let {type, payload} = action;
+  let authorId, authorNotes, updatedNotes;
 
   switch (type) {
-  case 'AUTHOR_CREATE': return {...state, [payload._id]: []};
-  case 'AUTHOR_DELETE':
-    delete state[payload._id];
-    return { ...state };
   case 'NOTE_GET': return payload;
   case 'NOTE_CREATE':
     validateNote(payload);
-    state[payload._id] = state[payload._id].concat([payload]);
-    return { ...state };
+    return [...state, payload];
   case 'NOTE_UPDATE':
     validateNote(payload);
-    state[payload._id] = state[payload._id].map(note => note._id === payload._id ? payload : note);
-    return { ...state };
+    return state.map(note => note._id === payload._id ? payload : note);
   case 'NOTE_DELETE':
     validateNote(payload);
-    state[payload._id] = state[payload._id].filter(note => note._id !== payload._id);
-    return { ...state };
+    return state.filter(note => note._id !== payload._id);
   default: return state;
   }
 };

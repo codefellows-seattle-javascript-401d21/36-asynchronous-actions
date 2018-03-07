@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const Author = module.exports = mongoose.Schema({
+const Author = mongoose.Schema({
     name: { type: String, required: true },
     notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'note' }],
 });

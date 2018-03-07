@@ -25,7 +25,6 @@ class AuthorForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onComplete(this.state);
-
     this.setState({
       name: '',
       editing: false,

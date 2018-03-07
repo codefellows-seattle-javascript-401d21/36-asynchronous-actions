@@ -38,7 +38,7 @@ export const noteCreateRequest = note => (dispatch, getState) => {
 };
 
 export const noteUpdateRequest = note => (dispatch) => {
-  return superagent.put(`${__API_URL__}/api/v1/note/`)
+  return superagent.put(`${__API_URL__}/api/v1/note/${note._id}`)
     .send(note)
     .then(() => dispatch(noteUpdate(note)))
     .catch(logError);

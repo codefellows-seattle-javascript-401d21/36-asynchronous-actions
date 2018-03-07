@@ -1,6 +1,7 @@
 'use strict';
 
 const Author = require('../model/author');
+const Note = require('../model/note');
 const bodyParser = require('body-parser').json();
 const debug = require('debug')('http:route-author');
 const errorHandler = require('../lib/error-handler');
@@ -45,7 +46,17 @@ module.exports = function(router) {
             if (!req.params._id) errorHandler(new Error('Validation error: no ID, cannot delete record.'));
 
             Author.findById(req.params._id)
-                .then(author => author.remove())
+                .then(author => {
+                    author.notes.forEach(note => {
+                        Note.findById(note)
+                            .then(note => note.remove())
+                            .catch(err => console.error(err));
+                    });
+                    return author;
+                })
+                .then(author => {
+                    return author.remove();
+                })
                 .then(author => {
                     res.sendStatus(204);
                     return author;

@@ -48,16 +48,14 @@ class AuthorItem extends React.Component {
   render() {
     return (
       <div className="author-item" key={this.props.author._id} onDoubleClick={this.handleEditing}>
-        <h2>{this.props.author.name}</h2>
+        <h2>{this.props.author.name}'s Notes</h2>
         <button onClick={this.handleDelete}>{this.props.buttonText}</button>
 
         {renderIf(this.state.editing, <AuthorForm author={this.props.author} buttonText="update author" onComplete={this.handleUpdate} />)}
 
         <div className="note-form">
           <NoteForm authorId={this.props.author._id} buttonText="create note" onComplete={this.props.noteCreate} />
-
-          {console.log('this.props.notes: ', this.props.notes)}
-          {console.log('this.props.author._id: ', this.props.author._id)}
+        
           {
             Array.isArray(this.props.notes) ?
               this.props.notes.map(note => {

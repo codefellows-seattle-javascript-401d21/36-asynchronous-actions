@@ -45,10 +45,8 @@ export const authorUpdateRequest = author => dispatch => {
 };
 
 export const authorDeleteRequest = author => (dispatch) => {
-  console.log('1: ', author);
   return superagent.delete(`${__API_URL__}/api/v1/author/${author._id}`)
     .then(() => {
-      console.log('2: ', author);
       dispatch(authorDelete(author));
     })
     .catch(logError);

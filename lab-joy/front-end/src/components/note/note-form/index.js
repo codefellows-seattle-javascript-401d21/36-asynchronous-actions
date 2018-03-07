@@ -8,7 +8,7 @@ class NoteForm extends React.Component {
       {
         title: '',
         content: '',
-        important: false,
+        important: 'false',
         editing: false,
         authorId: this.props.authorId,
         author: this.props.authorId,
@@ -33,7 +33,7 @@ class NoteForm extends React.Component {
     this.setState({
       title: '',
       content: '',
-      important: false,
+      important: 'false',
       editing: false,
     });
   }
