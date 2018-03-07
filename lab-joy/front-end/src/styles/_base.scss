@@ -1,0 +1,97 @@
+// ========================= BASE ========================= //
+
+$font-stack: Raleway, sans-serif;
+$background-color: #fff;
+$primary-color: #000;
+$secondary-color: #666;
+$tertiary-color: #ddd;
+$link-color: #aaa;
+$hover-color: #ccc;
+$invalid-color: #c60101;
+
+%borders {
+    border: solid 1px $secondary-color;
+    border-radius: 0.1em;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    background: $background-color;
+    color: $primary-color;
+    font: 100% $font-stack;
+    line-height: 1.5em;
+    word-spacing: 0.1em;
+    letter-spacing: 0.07em;
+}
+
+#wrapper {
+    width: 80%;
+    max-width: 50em;
+    text-align: center;
+    margin: 2em auto;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+h1 {
+    margin: 1em;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 900;
+    line-height: 1.5em;
+    letter-spacing: 0.02em;
+}
+
+h2 {
+    margin: 0.5em 0 0 0;
+    font-size: 1.2em;
+    font-weight: 900;
+}
+
+.center {
+    text-align: center;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+    button {
+        @extend %borders;
+        outline: none;
+        margin: 0.5em 1em 2em 0;
+        padding: 0.7em 2em;
+        color: $secondary-color;
+        background: $tertiary-color;
+        font-size: 1.2em;
+        font-weight: 100;
+        letter-spacing: 0.1em;
+        transition-duration: 0.25s;
+
+        &:hover {
+            background: $hover-color;
+        }
+
+        &:active {
+            color: $background-color;
+            background: $primary-color;
+            transform: scale(1.1);
+        }
+    }

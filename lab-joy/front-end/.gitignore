@@ -3,6 +3,8 @@ db
 **.env
 temp
 build
+angular
+src/__test__/note-item.test.js
 
 data/note
 
