@@ -1,0 +1,14 @@
+{
+  "name": "36-async",
+  "version": "1.0.0",
+  "description": "add back end and thunk middleware to react redux front end",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karen Perez",
+  "license": "MIT",
+  "devDependencies": {
+    "superagent": "^3.8.2"
+  }
+}
