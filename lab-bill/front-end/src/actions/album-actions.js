@@ -43,7 +43,7 @@ export const albumDeleteRequest = album => (dispatch, getState) => {
 };
 
 export const albumUpdateRequest = album => (dispatch, getState) => {
-  console.log(album)
+  console.log(album);
   return superagent.put(`${__API_URL__}/api/v1/album/${album._id}`)
     .send(album)
     .then(res => dispatch(albumUpdate(album)))

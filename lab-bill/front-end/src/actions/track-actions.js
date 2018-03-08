@@ -23,12 +23,12 @@ export const trackDelete = track => ({
 
 export const trackFetchRequest = () => dispatch => {
   return superagent.get(`${__API_URL__}/api/v1/track`)
-  .then(res => dispatch(trackGet(res.body)))
-  .catch(logError);
-}
+    .then(res => dispatch(trackGet(res.body)))
+    .catch(logError);
+};
 
 export const trackCreateRequest = track => (dispatch, getState) => {
-  console.log(track)
+  console.log(track);
   return superagent.post(`${__API_URL__}/api/v1/track`)
     .send(track)
     .then(res => dispatch(trackCreate(res.body)))
@@ -37,13 +37,13 @@ export const trackCreateRequest = track => (dispatch, getState) => {
 
 export const trackUpdateRequest = track => dispatch => {
   return superagent.put(`${__API_URL__}/api/v1/track/${track._id}`)
-  .send(track)
-  .then(res => dispatch(trackUpdate(track)))
-  .catch(logError);
-}
+    .send(track)
+    .then(res => dispatch(trackUpdate(track)))
+    .catch(logError);
+};
 
 export const trackDeleteRequest = track => dispatch => {
   return superagent.delete(`${__API_URL__}/api/v1/track/${track._id}`)
     .then(res => dispatch(trackDelete(track)))
     .catch(logError);
-}
+};

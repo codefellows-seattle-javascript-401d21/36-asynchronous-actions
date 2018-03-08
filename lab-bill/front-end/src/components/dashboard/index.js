@@ -5,8 +5,8 @@ import {
   albumCreateRequest,
   albumDeleteRequest,
   albumUpdateRequest} from '../../actions/album-actions';
-import {trackFetchRequest} from '../../actions/track-actions'
-import { trackCreateRequest } from '../../actions/track-actions'
+import {trackFetchRequest} from '../../actions/track-actions';
+import { trackCreateRequest } from '../../actions/track-actions';
 import AlbumForm from '../album-create/album-create';
 import TrackForm from '../track-create/track-create';
 
@@ -30,9 +30,9 @@ class Dashboard extends React.Component {
               <TrackForm album={album} buttonText="New Track" createTrack={this.props.createTrack}/>
               {this.props.tracks[album._id] ? 
                 this.props.tracks[album._id].map(track => 
-                    <p key={track._id} >{track.title}</p> )
+                  <p key={track._id} >{track.title}</p> )
                 : undefined
-                }
+              }
             </div>)
           :
           undefined
@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
 
 let mapStateToProps = state => ({
   albums: state.albums,
-  tracks: state.tracks
+  tracks: state.tracks,
 });
 
 let mapDispatchToProps = dispatch => ({

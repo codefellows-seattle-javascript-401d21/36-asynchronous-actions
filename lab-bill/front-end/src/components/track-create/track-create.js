@@ -8,7 +8,7 @@ class TrackForm extends React.Component {
       : {
         title: '',
         artist: '',
-        album: this.props.album._id
+        album: this.props.album._id,
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);

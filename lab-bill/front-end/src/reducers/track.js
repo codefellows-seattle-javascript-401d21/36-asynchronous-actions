@@ -14,7 +14,7 @@ export default (state={}, action) => {
   case 'TRACK_GET': return payload;
   case 'TRACK_CREATE':
     validateTrack(payload);
-    console.log(state,payload)
+    console.log(state,payload);
     state[payload.album] = state[payload.album].concat([payload]);
     return {...state};
   case 'TRACK_UPDATE':
