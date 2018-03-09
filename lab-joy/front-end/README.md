@@ -11,3 +11,9 @@ Lib: store, utils, redux-reporter, redux-thunk
 
 ## .env
 NODE_ENV=dev
+
+## How To Use
+* Follow the instructions in the back-end README to start up the back end
+* From the front-end directory in your terminal, use "npm run watch"
+* You can now access the website from your browser via the URL "http://localhost:8080"
+* To run tests, from the front-end directory of your terminal, use "npm run test"
