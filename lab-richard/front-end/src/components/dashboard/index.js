@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-container">
-        <h1>Hello World - Music Things</h1>
+        <h1>Hello World - My Music</h1>
 
         <AlbumForm
           buttonText='create'

@@ -4,9 +4,10 @@
   "description": "36-asynchronous-actions Front End",
   "main": "index.js",
   "scripts": {
-    "test": "jest -i",
+    "test": "jest --verbose",
+    "test:watch": "jest --watchALL",
     "build": "webpack",
-    "watch": "webpack-dev-server"
+    "watch": "webpack-dev-server --inline --hot"
   },
   "repository": {
     "type": "git",

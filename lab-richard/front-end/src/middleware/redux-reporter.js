@@ -1,4 +1,4 @@
-import {log, logError} from './utils'
+import {log, logError} from '../lib/utils'
 
 export default store => next => action => {
   log('__ACTION__', action)

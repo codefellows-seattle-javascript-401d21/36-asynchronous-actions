@@ -6,8 +6,8 @@ export default class AlbumForm extends React.Component {
         this.state = {
             editing: false,
             album: this.props.album
-                ? this.props.album
-                : {name: ''},
+            ? this.props.album
+            : {name: ''},
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSumbit = this.handleSubmit.bind(this)
@@ -19,14 +19,14 @@ export default class AlbumForm extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault()
-        this.props.onComplete(this.state.album)
+        e.preventDefault();
+        this.props.onComplete(this.state.album);
         Object.keys(this.state.album).map(key => this.setState({[key]: ''}))
     }
     
     render() {
         return (
-            <form classNAme="album-form" onSubmit={this.handleSubmit}>
+            <form className="album-form" onSubmit={this.handleSubmit}>
                 <input
                     type="text"
                     name="name"

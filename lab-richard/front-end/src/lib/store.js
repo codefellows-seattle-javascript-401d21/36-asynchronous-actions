@@ -1,6 +1,6 @@
 import reducer from '../reducers'
-import thunk from './redux-thunk'
-import reporter from './redux-reporter'
+import thunk from '../middleware/redux-thunk'
+import reporter from '../middleware/redux-reporter'
 import {createStore, applyMiddleware} from 'redux'
 
 let appStoreCreate = () =>
