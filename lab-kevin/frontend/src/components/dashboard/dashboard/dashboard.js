@@ -11,7 +11,6 @@ class Dashboard extends React.Component{
   }
 
   render(){
-    console.log('match path',this.props.match.path);
     return (
       <section className="dashboard-container">
         <h2>All the World&apos;s a Stage<span>--William Shakespeare</span></h2>
