@@ -2,6 +2,7 @@ import React from 'react';
 import {Album_ImageForm} from '../../album-image';
 import {AlbumImage} from '../../album-image';
 import {connect} from 'react-redux';
+import {albumDeleteRequest, albumUpdateRequest} from '../../../actions/album-actions';
 import {imageCreateRequest, imageDeleteRequest, imageUpdateRequest} from '../../../actions/image-actions'; 
 
 class AlbumItem extends React.Component{
@@ -9,14 +10,35 @@ class AlbumItem extends React.Component{
     super(props);
     this.state = {
       isVisible: false,
+      readonly: true,
+      title: this.props.album.title,
     };
     this.toggleAlbumImageForm = this.toggleAlbumImageForm.bind(this);
     this.handleImageCreate = this.handleImageCreate.bind(this);
-    this.handleDelete = this.handleDelete.bind();
+    this.handleDelete = this.handleDelete.bind(this);
+    this.toggleReadonly = this.toggleReadonly.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+  }
+
+  handleUpdate(e){
+    e.preventDefault();
+    e.target.firstElementChild.blur();
+    let album = this.props.album;
+    album.title = this.state.title;
+    this.props.albumUpdateRequest(album);
   }
 
   handleDelete(){
+    this.props.albumDeleteRequest(this.props.album);
+  }
 
+  toggleReadonly(){
+    this.setState({readonly: !this.state.readonly});
+  }
+
+  handleChange(e){
+    this.setState({[e.target.name]: e.target.value});
   }
 
   toggleAlbumImageForm(){
@@ -31,9 +53,20 @@ class AlbumItem extends React.Component{
   render(){
     return (
       <li className="album-list-item">
-        <button onClick={this.toggleAlbumImageForm}>Add New Image</button>
         <div className="album-image-wrap">
-          <h3>{this.props.album.title}</h3>
+          <h3>
+            <form className="albumUpdateForm" onSubmit={this.handleUpdate}>
+              <input name="title"
+                onBlur={this.toggleReadonly}
+                onDoubleClick={this.toggleReadonly}
+                onChange={this.handleChange}
+                value={this.state.title} 
+                readOnly={this.state.readonly}/>
+              <input type="hidden" name="submit" />
+            </form>
+          </h3>
+          <button onClick={this.handleDelete}>Delete Album</button>
+          <button onClick={this.toggleAlbumImageForm}>Add New Image</button>
           <ul>
             {this.props.images[this.props.album._id].length ?  this.props.images[this.props.album._id].map(image => (
               <AlbumImage 
@@ -63,5 +96,7 @@ const mapDispatchToState = dispatch => ({
   imageCreateRequest: image => dispatch(imageCreateRequest(image)),
   imageDeleteRequest: image => dispatch(imageDeleteRequest(image)),
   imageUpdateRequest: image => dispatch(imageUpdateRequest(image)),
+  albumDeleteRequest: album => dispatch(albumDeleteRequest(album)),
+  albumUpdateRequest: album => dispatch(albumUpdateRequest(album)),
 });
 export default connect(mapPropsToState, mapDispatchToState)(AlbumItem);

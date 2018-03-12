@@ -25,7 +25,6 @@ class Album_ImageForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    // if (!e.target.value.trim()) return;
     this.props.onComplete(this.state);
     this.setState({file_name: '',
       file_path: '',
@@ -39,12 +38,6 @@ class Album_ImageForm extends React.Component{
   render(){
     return (
       <form className="album-image-form" onSubmit={this.handleSubmit}>
-        {/* <input name="file_name" 
-          type="text" 
-          onChange={this.handleChange} 
-          value={this.state.file_name} 
-          placeholder="File Name" />         */}
-
         <input name="file_path"
           type="text" 
           onChange={this.handleChange} 

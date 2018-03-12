@@ -2,7 +2,7 @@ import superagent from 'superagent';
 
 const image_create = image => ({ type: 'IMAGE_CREATE', payload: image});
 
-const image_set = image => ({type: 'IMAGESET', payload: image});
+const image_set = image => ({type: 'IMAGE_SET', payload: image});
 
 const image_update = image => ({type: 'IMAGE_UPDATE', payload: image});
 
@@ -26,7 +26,7 @@ const imageDeleteRequest = image => dispatch => {
 const imageUpdateRequest = image => dispatch => {
   return superagent.put(`${__API_URL__}/api/v1/image/${image._id}`)
     .send(image)
-    .then(res => dispatch(image_update(res.body)))
+    .then(() => dispatch(image_update(image)))
     .catch(console.error);
 };
 

@@ -33,7 +33,7 @@ module.exports = function(router){
         .catch(err => errorHandler(err,res));
     })
     .put(bodyParser, (req, res) => {
-      Image.findByIdAndUpdate(req.params.id, req.body, {upsert: true, runValidators: true, new: true})
+      Image.findByIdAndUpdate(req.params.id, req.body)
         .then(img => {
           debug('put img', img);
           res.sendStatus(204);

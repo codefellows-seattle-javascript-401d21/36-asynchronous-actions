@@ -3,15 +3,7 @@ import React from 'react';
 export default class AlbumImage extends React.Component{
   constructor(props){
     super(props);
-    this.state = {
-      _id: this.props.image._id,
-      file_name: this.props.image.file_name,
-      file_path: this.props.image.file_path,
-      title: this.props.image.title,
-      description: this.props.image.description,
-      photographer: this.props.image.photographer,
-      readonly: true,
-    };
+    this.state = {...this.props.image, readonly: true};
 
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +25,7 @@ export default class AlbumImage extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    e.target.blur();
     this.props.onComplete(this.state)
       .then(() => this.setState({readonly: true}));
   }
@@ -40,34 +33,43 @@ export default class AlbumImage extends React.Component{
   render(){
     return (
       <li>
-        <span onClick={this.handleDelete}>delete</span>
-        <form onSubmit={this.handleSubmit}>
-  
+        <span onClick={this.handleDelete}>delete image</span>
+        <form name="album-image-form" onSubmit={this.handleSubmit}>
+          <label htmlFor="file_path">Path</label>
           <input type="text" 
             name="file_path" 
             onChange={this.handleChange} 
-            value={this.state.file_path} 
+            value={this.state.file_path}
+            onBlur={this.toggleReadOnly} 
             onDoubleClick={this.toggleReadOnly} 
             readOnly={this.state.readonly}/>
 
+          <label htmlFor="title">Title</label>
           <input type="text" 
             name="title" onChange={this.handleChange} 
             value={this.state.title} 
+            onBlur={this.toggleReadOnly} 
             onDoubleClick={this.toggleReadOnly} 
             readOnly={this.state.readonly}/>
+
+          <label htmlFor="description">Description</label>
           <input type="text" 
             name="description" 
             onChange={this.handleChange} 
             value={this.state.description} 
+            onBlur={this.toggleReadOnly} 
             onDoubleClick={this.toggleReadOnly} 
             readOnly={this.state.readonly}/>
+
+          <label htmlFor="photographer">Photographer</label>
           <input type="text" name="photographer" 
             onChange={this.handleChange} 
+            onBlur={this.toggleReadOnly} 
             value={this.state.photographer} 
             onDoubleClick={this.toggleReadOnly} 
             readOnly={this.state.readonly}/> 
 
-          <input type="hidden" name="submit" />   
+          <input type="submit" name="submit" value="=submit"/>   
 
         </form>
       </li>

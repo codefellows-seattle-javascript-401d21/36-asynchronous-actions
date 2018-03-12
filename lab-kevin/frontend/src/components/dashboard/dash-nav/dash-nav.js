@@ -7,7 +7,6 @@ class DashNav extends React.Component{
   }
 
   render(){
-    console.log('path', this.props.path);
     return (
       <ul className="dash-nav-list">
         <li className="dash-nav-list-item"><Link to={`${this.props.path}/generator`}>Generator</Link></li>

@@ -33,7 +33,7 @@ module.exports = function(router){
         .catch(err => errorHandler(err,res));
     })
     .put(bodyParser, (req, res) => {
-      Album.findByIdAndUpdate(req.params.id, req.body, {upsert: true, runValidators: true, new: true})
+      Album.findByIdAndUpdate(req.params.id, req.body)
         .then(album => {
           debug('put album', album);
           res.sendStatus(204);
