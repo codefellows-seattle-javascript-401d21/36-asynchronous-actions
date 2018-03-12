@@ -1,7 +1,8 @@
 import React from 'react';
 import {Album_ImageForm} from '../../album-image';
+import {AlbumImage} from '../../album-image';
 import {connect} from 'react-redux';
-import {imageCreateRequest} from '../../../actions/image-actions'; 
+import {imageCreateRequest, imageDeleteRequest, imageUpdateRequest} from '../../../actions/image-actions'; 
 
 class AlbumItem extends React.Component{
   constructor(props){
@@ -11,6 +12,11 @@ class AlbumItem extends React.Component{
     };
     this.toggleAlbumImageForm = this.toggleAlbumImageForm.bind(this);
     this.handleImageCreate = this.handleImageCreate.bind(this);
+    this.handleDelete = this.handleDelete.bind();
+  }
+
+  handleDelete(){
+
   }
 
   toggleAlbumImageForm(){
@@ -19,6 +25,7 @@ class AlbumItem extends React.Component{
 
   handleImageCreate(image){
     this.props.imageCreateRequest({...image, album: this.props.album._id});
+    this.toggleAlbumImageForm();
   }
 
   render(){
@@ -27,10 +34,16 @@ class AlbumItem extends React.Component{
         <button onClick={this.toggleAlbumImageForm}>Add New Image</button>
         <div className="album-image-wrap">
           <h3>{this.props.album.title}</h3>
-          {this.props.images.length ?  this.props.images.map(image => (
-            <p key={image._id}>{image.file_name}</p>
-          )
-          ) : undefined}
+          <ul>
+            {this.props.images[this.props.album._id].length ?  this.props.images[this.props.album._id].map(image => (
+              <AlbumImage 
+                key={image._id}
+                image={image}
+                onComplete={this.props.imageUpdateRequest} 
+                deleteImage={this.props.imageDeleteRequest}/>
+            )
+            ) : undefined}
+          </ul>
         </div>
         { this.state.isVisible ? 
           <Album_ImageForm onComplete={this.handleImageCreate}
@@ -48,5 +61,7 @@ const mapPropsToState = state => ({
 
 const mapDispatchToState = dispatch => ({
   imageCreateRequest: image => dispatch(imageCreateRequest(image)),
+  imageDeleteRequest: image => dispatch(imageDeleteRequest(image)),
+  imageUpdateRequest: image => dispatch(imageUpdateRequest(image)),
 });
 export default connect(mapPropsToState, mapDispatchToState)(AlbumItem);

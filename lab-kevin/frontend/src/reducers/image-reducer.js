@@ -17,7 +17,6 @@ export default (state={}, action) => {
   takeAction['IMAGE_CREATE'] = image => {
     let alteredState = {...state};
     alteredState[image.album] = [...alteredState[image.album], image];
-    console.log(alteredState);
     return alteredState;
   };
 

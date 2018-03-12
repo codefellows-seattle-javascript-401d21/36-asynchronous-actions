@@ -10,7 +10,7 @@ const album_delete = id => ({type: 'ALBUM_DELETE', payload: id});
 
 
 
-const albumCreateRequest = album => (dispatch, getState) => {
+const albumCreateRequest = album => dispatch => {
   return superagent.post(`${__API_URL__}/api/v1/album`)
     .send(album)
     .then(res => dispatch(album_create(res.body)))

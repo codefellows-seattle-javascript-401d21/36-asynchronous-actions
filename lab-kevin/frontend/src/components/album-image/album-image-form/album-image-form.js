@@ -39,11 +39,11 @@ class Album_ImageForm extends React.Component{
   render(){
     return (
       <form className="album-image-form" onSubmit={this.handleSubmit}>
-        <input name="file_name" 
+        {/* <input name="file_name" 
           type="text" 
           onChange={this.handleChange} 
           value={this.state.file_name} 
-          placeholder="File Name" />        
+          placeholder="File Name" />         */}
 
         <input name="file_path"
           type="text" 

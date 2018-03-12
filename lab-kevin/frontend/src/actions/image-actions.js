@@ -10,12 +10,24 @@ const image_delete = image => ({type: 'IMAGE_DELETE', payload: image});
 
 
 
-const imageCreateRequest = image => (dispatch, getState) => {
+const imageCreateRequest = image => dispatch => {
   return superagent.post(`${__API_URL__}/api/v1/image`)
     .send(image)
     .then(res => dispatch(image_create(res.body)))
     .catch(console.err); 
 };
 
+const imageDeleteRequest = image => dispatch => {
+  return superagent.delete(`${__API_URL__}/api/v1/image/${image._id}`)
+    .then(() => dispatch(image_delete(image)))
+    .catch(console.error);
+};
 
-export {image_create, image_set, image_update, image_delete, imageCreateRequest};
+const imageUpdateRequest = image => dispatch => {
+  return superagent.put(`${__API_URL__}/api/v1/image/${image._id}`)
+    .send(image)
+    .then(res => dispatch(image_update(res.body)))
+    .catch(console.error);
+};
+
+export {image_create, image_set, image_update, image_delete, imageCreateRequest, imageUpdateRequest, imageDeleteRequest};
