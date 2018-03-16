@@ -2,10 +2,11 @@ import uuid from 'uuid/v4';
 import {logError} from '../lib/utils';
 import superagent from 'superagent';
 
-export const booksGet = books => ({
-  type: 'BOOKS_GET',
-  payload: books,
-});
+export const booksSet = books => {console.log('action books set: ', books);
+  return {
+  type: 'BOOKS_SET',
+  payload: books,}
+};
 
 export const bookCreate = book => ({
     type: 'BOOK_CREATE',
@@ -24,7 +25,7 @@ export const bookDelete = book => ({
 
 export const bookFetchRequest = () => dispatch => {
   return superagent.get(`${__API_URL__}/api/v1/book`)
-    .then(res => dispatch(booksGet(res.body)))
+    .then(res => dispatch(booksSet(res.body)))
     .catch(logError);
 };
 

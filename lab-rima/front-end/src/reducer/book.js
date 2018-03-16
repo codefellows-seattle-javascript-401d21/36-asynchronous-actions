@@ -25,8 +25,16 @@ export default (state={}, action) => {
     return curState;
   }
 
-  case 'BOOKS_GET': {
-    return payload;
+  case 'BOOKS_SET': {
+    let curState = {};
+    for(let i = 0; i < payload.length; i++){
+      if(!(payload[i].language in curState)){
+        curState[payload[i].language] = [];
+      }
+      curState[payload[i].language].push(payload[i]);
+    }
+    console.log(curState);
+    return curState;
   }
 
   case 'BOOK_CREATE': {

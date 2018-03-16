@@ -42,6 +42,7 @@ class LanguageItem extends React.Component{
   }
 
   render(){
+    console.log(this.props);
     return <li
       key={this.props.key}
     >
@@ -70,11 +71,11 @@ class LanguageItem extends React.Component{
           onComplete={this.props.bookCreate} />
 
         <ul>
-          { this.props.books[this.props.languageItem._id] ?
-            this.props.books[this.props.languageItem._id].map(languageItem => {
-              return <LanguageItem 
-                key={languageItem._id}
-                languageItem={languageItem}
+          { this.props.languageItem._id in this.props.books ?
+            this.props.books[this.props.languageItem._id].map(book => {
+              return <BookItem 
+                key={book._id}
+                bookItem={book}
                 onClick={this.props.bookDelete} />;
             })
             :

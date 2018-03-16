@@ -27,6 +27,7 @@ class Dashboard extends React.Component{
               return <LanguageItem 
                 key={languageItem._id}
                 languageItem={languageItem}
+                books={languageItem.books}
                 onClick={this.props.languageDelete} />
             })
             :
