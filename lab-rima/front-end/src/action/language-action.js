@@ -1,17 +1,16 @@
-import superagent from 'superagent';
+import uuid from 'uuid/v4';
 import {logError} from '../lib/utils';
+import superagent from 'superagent';
 
-export const languageSet = languages => ({
-  type: 'LANGUAGE_SET',
+export const languagesSet = languages => ({
+  type: 'LANGUAGES_SET',
   payload: languages,
 });
 
-export const languageCreate = language => {
-  return {
-    type: 'LANGUAGE_CREATE',
-    payload: language,
-  };
-};
+export const languageCreate = language => ({
+  type: 'LANGUAGE_CREATE',
+  payload: language,
+});
 
 export const languageUpdate = language => ({
   type: 'LANGUAGE_UPDATE',
@@ -23,28 +22,30 @@ export const languageDelete = language => ({
   payload: language,
 });
 
-export const languageFetchAllRequest = () => dispatch => {
+// asynchronous action
+export const languageFetchRequest = () => dispatch => {
   return superagent.get(`${__API_URL__}/api/v1/language`)
-    .then(res => dispatch(languageSet(res.body)))
+    .then(res => dispatch(languagesSet(res.body)))
     .catch(logError);
 };
 
-export const languageCreateRequest = language => (dispatch, getState) => {
+export const languageCreateRequest = language => (dispatch) => {
   return superagent.post(`${__API_URL__}/api/v1/language`)
     .send(language)
     .then(res => dispatch(languageCreate(res.body)))
     .catch(logError);
 };
 
-export const languageUpdateRequest = language => (dispatch, getState) => {
+export const languageUpdateRequest = language => (dispatch) => {
+  console.log(language);
   return superagent.put(`${__API_URL__}/api/v1/language/${language._id}`)
     .send(language)
     .then(() => dispatch(languageUpdate(language)))
     .catch(logError);
 };
 
-export const languageDeleteRequest = language => (dispatch, getState) => {
-  return superagent.del(`${__API_URL__}/api/v1/language/${language._id}`)
-    .then(() => dispatch(languageDelete(langauge)))
+export const languageDeleteRequest = language => (dispatch) => {
+  return superagent.delete(`${__API_URL__}/api/v1/language/${language._id}`)
+    .then(() => dispatch(languageDelete(language)))
     .catch(logError);
 };

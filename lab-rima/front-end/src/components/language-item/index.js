@@ -1,15 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {languageUpdate} from '../../action/language-action';
-import {bookCreate, bookDelete} from '../../action/book-action';
 import {languageUpdateRequest} from '../../action/language-action';
-import {
-  bookCreateRequest,
-  bookDeleteRequest} from '../../action/book-action';
+import {bookCreateRequest, bookDeleteRequest} from '../../action/book-action';
 import LanguageForm from '../language-form/index';
 import BookForm from '../book-form/index';
 import BookItem from '../book-item/index';
 import {renderIf} from '../../lib/utils';
+
 
 class LanguageItem extends React.Component{
   constructor(props){
@@ -45,7 +42,6 @@ class LanguageItem extends React.Component{
   }
 
   render(){
-    const books = this.props.books.filter(book => book.language === this.props.languageItem._id);
     return <li
       key={this.props.key}
     >
@@ -66,6 +62,7 @@ class LanguageItem extends React.Component{
       )}
 
       <section>
+        <h4>{this.props.languageItem.name}</h4>
 
         <BookForm
           languageId={this.props.languageItem._id}
@@ -73,13 +70,15 @@ class LanguageItem extends React.Component{
           onComplete={this.props.bookCreate} />
 
         <ul>
-          {
-            books.map(bookItem => {
-                return <BookItem
-                  key={bookItem._id}
-                  bookItem={bookItem}
-                  onClick={this.props.bookDelete} />;
+          { this.props.books[this.props.languageItem._id] ?
+            this.props.books[this.props.languageItem._id].map(languageItem => {
+              return <LanguageItem 
+                key={languageItem._id}
+                languageItem={languageItem}
+                onClick={this.props.bookDelete} />;
             })
+            :
+            undefined
           }
         </ul>
       </section>
@@ -88,7 +87,6 @@ class LanguageItem extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  languages: state.languages,
   books: state.books,
 });
 

@@ -5,7 +5,7 @@ class LanguageForm extends React.Component{
   constructor(props){
     super(props);
 
-    this.state = this.props.language ? this.props.language :
+    this.state = this.props.language ||
       {
         name: '',
       };
@@ -30,9 +30,15 @@ class LanguageForm extends React.Component{
     event.preventDefault();
     this.props.onComplete(this.state);
 
-    this.setState({
-      name: '',
-    });
+    if(this.props.languages){
+      this.setState(this.props.languages)
+    }else{
+      this.setState(
+        {
+          name: '',
+        }
+      );
+    }
   }
 
   handleClick(event){
@@ -40,9 +46,15 @@ class LanguageForm extends React.Component{
 
     this.props.editing.setState({editing: false});
 
-    this.setState({
-      name: '',
-    });
+    if(this.props.languages){
+      this.setState(this.props.languages)
+    }else{
+      this.setState(
+        {
+          name: '',
+        }
+      );
+    }
   }
 
   render(){
@@ -58,7 +70,7 @@ class LanguageForm extends React.Component{
           name="name"
           value={this.state.name}
           onChange={this.handleChange}
-          placeholder="language"/>
+          placeholder="Enter a name"/>
 
         <button
           className="save"

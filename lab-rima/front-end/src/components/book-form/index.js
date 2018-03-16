@@ -4,9 +4,10 @@ import {renderIf} from '../../lib/utils';
 class BookForm extends React.Component{
   constructor(props){
     super(props);
-    this.state = this.props.book ? this.props.book :
+
+    this.state = this.props.book ||
       {
-        languageId: this.props.languageId,
+        language: this.props.languageId,
         title: '',
         author: '',
       };
@@ -31,11 +32,15 @@ class BookForm extends React.Component{
     event.preventDefault();
     this.props.onComplete(this.state);
 
-    this.setState({
-      languageId: this.props.languageId,
-      title: '',
-      author: '',
-    });
+    if(this.props.book){
+      this.setState(this.props.book);
+    }else{
+      this.setState({
+        language: this.props.languageId,
+        title: '',
+        author: '',
+      });
+    }
   }
 
   handleClick(event){
@@ -43,11 +48,15 @@ class BookForm extends React.Component{
 
     this.props.editing.setState({editing: false});
 
-    this.setState({
-      languageId: this.props.languageId,
-      title: '',
-      author: '',
-    });
+    if(this.props.book){
+      this.setState(this.props.book);
+    }else{
+      this.setState({
+        language: this.props.languageId,
+        title: '',
+        author: '',
+      });
+    }
   }
 
   render(){
@@ -58,17 +67,12 @@ class BookForm extends React.Component{
         id="book-form">
 
         <input
-          name="languageId"
-          type="hidden"
-          value={this.state.languageId}/>
-
-        <input
           className="title"
           type="text"
           name="title"
           value={this.state.title}
           onChange={this.handleChange}
-          placeholder="title"/>
+          placeholder="Enter a title"/>
 
         <input
           className="author"

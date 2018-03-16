@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {bookUpdate} from '../../action/book-action';
 import {bookUpdateRequest} from '../../action/book-action';
 import BookForm from '../book-form/index';
 import {renderIf} from '../../lib/utils';
@@ -42,7 +41,7 @@ class BookItem extends React.Component{
     return <li
       key={this.props.bookItem._id}
     >
-      <p onDoubleClick={this.handleDoubleClick}>{this.props.bookItem.title} by {this.props.bookItem.author}</p>
+      <p onDoubleClick={this.handleDoubleClick}>{this.props.bookItem.title}: {this.props.bookItem.author}</p>
 
       <button
         className="delete"
@@ -62,7 +61,6 @@ class BookItem extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  languages: state.languages,
   books: state.books,
 });
 
