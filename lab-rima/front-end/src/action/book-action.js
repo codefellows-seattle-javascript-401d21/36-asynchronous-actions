@@ -4,13 +4,13 @@ import superagent from 'superagent';
 
 export const booksSet = books => {console.log('action books set: ', books);
   return {
-  type: 'BOOKS_SET',
-  payload: books,}
+    type: 'BOOKS_SET',
+    payload: books};
 };
 
 export const bookCreate = book => ({
-    type: 'BOOK_CREATE',
-    payload: book,
+  type: 'BOOK_CREATE',
+  payload: book,
 });
 
 export const bookUpdate = book => ({
@@ -32,12 +32,12 @@ export const bookFetchRequest = () => dispatch => {
 export const bookCreateRequest = book => (dispatch) => {
   return superagent.post(`${__API_URL__}/api/v1/book`)
     .send(book)
-    .then(res => {console.log(res.body); dispatch(bookCreate(res.body))})
+    .then(res => {console.log(res.body); dispatch(bookCreate(res.body));})
     .catch(logError);
 };
 
 export const bookUpdateRequest = book => (dispatch) => {
-console.log('BOOK UPDATE', book);
+  console.log('BOOK UPDATE', book);
   return superagent.put(`${__API_URL__}/api/v1/book/${book._id}`)
     .send(book)
     .then(() => dispatch(bookUpdate(book)))

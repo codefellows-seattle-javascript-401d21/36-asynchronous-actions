@@ -54,8 +54,8 @@ export default (state={}, action) => {
     let curState = state;
     curState[payload.language].push(payload);
     return Object.assign({}, state, {
-        books: curState
-      });
+      books: curState,
+    });
     //let curState = state;
     //curState[payload.language].push(payload);
     //return curState;

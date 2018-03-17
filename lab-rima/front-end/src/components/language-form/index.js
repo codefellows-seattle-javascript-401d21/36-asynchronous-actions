@@ -31,7 +31,7 @@ class LanguageForm extends React.Component{
     this.props.onComplete(this.state);
 
     if(this.props.languages){
-      this.setState(this.props.languages)
+      this.setState(this.props.languages);
     }else{
       this.setState(
         {
@@ -47,7 +47,7 @@ class LanguageForm extends React.Component{
     this.props.editing.setState({editing: false});
 
     if(this.props.languages){
-      this.setState(this.props.languages)
+      this.setState(this.props.languages);
     }else{
       this.setState(
         {

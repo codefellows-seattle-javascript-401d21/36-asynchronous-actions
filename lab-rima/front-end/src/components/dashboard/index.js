@@ -28,7 +28,7 @@ class Dashboard extends React.Component{
                 key={languageItem._id}
                 languageItem={languageItem}
                 books={languageItem.books}
-                onClick={this.props.languageDelete} />
+                onClick={this.props.languageDelete} />;
             })
             :
             undefined
