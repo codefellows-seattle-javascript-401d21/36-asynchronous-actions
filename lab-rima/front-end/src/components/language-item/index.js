@@ -42,7 +42,7 @@ class LanguageItem extends React.Component{
   }
 
   render(){
-    console.log(this.props);
+    console.log('props in languageitem',this.props);
     return <li
       key={this.props.key}
     >

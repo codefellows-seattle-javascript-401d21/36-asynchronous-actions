@@ -48,7 +48,14 @@ export default (state={}, action) => {
     if(payload.title.trim().length === 0){
       throw new Error('BOOK REDUCER: Book title cannot be empty.');
     }
-    return {...state, payload};
+    let curState = state;
+    curState[payload.language].push(payload);
+    return Object.assign({}, state, {
+        books: curState
+      });
+    //let curState = state;
+    //curState[payload.language].push(payload);
+    //return curState;
   }
 
   case 'BOOK_UPDATE': {

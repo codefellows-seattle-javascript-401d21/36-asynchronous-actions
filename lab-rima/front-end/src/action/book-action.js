@@ -32,12 +32,13 @@ export const bookFetchRequest = () => dispatch => {
 export const bookCreateRequest = book => (dispatch) => {
   return superagent.post(`${__API_URL__}/api/v1/book`)
     .send(book)
-    .then(res => dispatch(bookCreate(res.body)))
+    .then(res => {console.log(res.body); dispatch(bookCreate(res.body))})
     .catch(logError);
 };
 
 export const bookUpdateRequest = book => (dispatch) => {
-  return superagent.put(`${__API_URL__}/api/v1/book/{$book._id}`)
+console.log('BOOK UPDATE', book);
+  return superagent.put(`${__API_URL__}/api/v1/book/${book._id}`)
     .send(book)
     .then(() => dispatch(bookUpdate(book)))
     .catch(logError);
