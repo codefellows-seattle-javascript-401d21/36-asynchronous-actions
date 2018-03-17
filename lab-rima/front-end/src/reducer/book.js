@@ -45,8 +45,11 @@ export default (state={}, action) => {
     if(!payload.language || payload.language.trim().length === 0){
       throw new Error('BOOK REDUCER: Book languageID must be present.');
     }
-    if(payload.title.trim().length === 0){
+    if(!payload.title || payload.title.trim().length === 0){
       throw new Error('BOOK REDUCER: Book title cannot be empty.');
+    }
+    if(!payload.author || payload.author.trim().length === 0){
+      throw new Error('BOOK REDUCER: Book author cannot be empty.');
     }
     let curState = state;
     curState[payload.language].push(payload);
@@ -65,8 +68,11 @@ export default (state={}, action) => {
     if(!payload.language || payload.language.trim().length === 0){
       throw new Error('BOOK REDUCER: Book languageID must be present.');
     }
-    if(payload.title.trim().length === 0){
+    if(!payload.title || payload.title.trim().length === 0){
       throw new Error('BOOK REDUCER: Book title cannot be empty.');
+    }
+    if(!payload.author || payload.author.trim().length === 0){
+      throw new Error('BOOK REDUCER: Book author cannot be empty.');
     }
     let curState = {...state};
     curState[payload.language] = state[payload.language].map(book => book._id === payload._id ? payload : book);
@@ -80,8 +86,11 @@ export default (state={}, action) => {
     if(!payload.language || payload.language.trim().length === 0){
       throw new Error('BOOK REDUCER: Book languageID must be present.');
     }
-    if(payload.title.trim().length === 0){
+    if(!payload.title || payload.title.trim().length === 0){
       throw new Error('BOOK REDUCER: Book title cannot be empty.');
+    }
+    if(!payload.author || payload.author.trim().length === 0){
+      throw new Error('BOOK REDUCER: Book author cannot be empty.');
     }
     let curState = {...state};
     curState[payload.language] = state[payload.language].filter(book => book._id !== payload._id);
