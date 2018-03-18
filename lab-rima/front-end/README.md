@@ -25,9 +25,7 @@ NODE_ENV=dev
 API_URL="http://localhost:3000"
 CDN_URL="/"
 ```
-
 backend .env:
-
 ```
 PORT=3000
 MONGODB_URI="mongodb://localhost/<your prefered db name>"
