@@ -1,0 +1,16 @@
+{
+  "name": "36-asynchronous-functions",
+  "version": "1.0.0",
+  "description": "full stack front-end back-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "full",
+    "stack",
+    "application"
+  ],
+  "author": "Yohan the Dev Don",
+  "license": "ISC"
+}
