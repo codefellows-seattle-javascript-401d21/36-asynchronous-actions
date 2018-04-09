@@ -1,9 +1,8 @@
-import reducer from '../reducers'
-import thunk from './redux-thunk'
-import reporter from './redux-reporter'
-import {createStore, applyMiddleware} from 'redux'
+import { createStore, applyMiddleware } from 'redux';
+import reducer from '../reducer';
+import thunk from '../middleware/redux-thunk';
+import reduxReporter from '../middleware/redux-reporter';
+import crashReporter from '../middleware/crash-reporter';
 
-let appStoreCreate = () =>
-  createStore(reducer, applyMiddleware(thunk, reporter))
 
-export default appStoreCreate
+export default () => createStore(reducer, applyMiddleware(thunk, reduxReporter, crashReporter));

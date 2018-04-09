@@ -1,51 +1,62 @@
-'use strict'
+'use strict';
+
+const debug = require('debug')('http:server');
 
 // Application Dependencies
-const cors = require('cors')
-const express = require('express')
-const mongoose = require('mongoose')
-const debug = require('debug')('http:server')
-const errorHandler = require('./error-handler')
+const cors = require('cors');
+const express = require('express');
+const mongoose = require('mongoose');
+const eH = require('./error-handler');
 
 // Application Setup
-const PORT = process.env.PORT
-const router = express.Router()
-const app = express()
-const MONGODB_URI = process.env.MONGODB_URI
+const app = express();
+const PORT = process.env.PORT;
+//console.log(PORT);
+const router = express.Router();
+const MONGODB_URI = process.env.MONGODB_URI;
+mongoose.connect(MONGODB_URI);
+//console.log(MONGODB_URI);
 
 // Middleware
-require('../route/route-track')(router)
-require('../route/route-album')(router)
-app.use(cors())
-app.use('/api/v1', router)
+app.use(cors());
+app.use('/api/v1', router);
+require('../route/route-dog')(router);
+require('../route/route-breed')(router);
+app.use('/{0,}', (req, res) => {
 
-// 404 Error Handler
-app.all('/*', (req, res) => errorHandler(new Error('PATH ERROR. Route does not exist'), res))
+    debug('here is path error in server.js');
+
+    eH(new Error('Path error.'), res);
+});
 
 // Server Controls
-let server = module.exports = {}
-server.start = () => {
-  return new Promise((resolve, reject) => {
-    if(server.isOn) return reject('shit hit the fan')
+const server = module.exports = {};
 
-    server.http = app.listen(PORT, () => {
-      console.log('server up', PORT)
-      mongoose.connect(MONGODB_URI)
-      server.isOn = true
-      return resolve(server)
-    })
-  })
-}
+server.start = () => {
+    return new Promise((resolve, reject) => {
+        if (server.isOn) {
+            return reject(new Error('Server running.'));
+        }
+
+        server.http = app.listen(PORT, () => {
+            console.log(`Listening on ${PORT}`);
+            server.isOn = true;
+            return resolve(server);
+        });
+    });
+};
 
 server.stop = () => {
-  return new Promise((resolve, reject) => {
-    if(!server.isOn) return reject()
+    return new Promise((resolve, reject) => {
+        if (!server.isOn) {
+            return reject(new Error('Server not running.'));
+        }
 
-    server.http.close(() => {
-      console.log('server down')
-      mongoose.disconnect()
-      server.isOn = false
-      return resolve()
-    })
-  })
-}
+        server.http.close(() => {
+            console.log(`Shutting down server`);
+            mongoose.disconnect();
+            server.isOn = false;
+            return resolve(server);
+        });
+    });
+};

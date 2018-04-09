@@ -1,56 +1,54 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {
-  albumFetchRequest,
-  albumCreateRequest} from '../../actions/album-actions'
-import {
-  trackFetchRequest,
-  trackCreateRequest} from '../../actions/track-actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import { breedFetchRequest, breedDeleteRequest, breedCreateRequest } from '../../action/breed-action';
+import { dogFetchRequest } from '../../action/dog-action';
+import BreedForm from '../breed-form';
+import BreedItem from '../breed-item';
 
 class Dashboard extends React.Component {
-  componentWillMount() {
-    this.props.fetchAlbums()
-    this.props.fetchTracks()
-  // this.props.albums.push({_id: '123', name: 'joe'})
-  // this.props.albums.push({_id: '456', name: 'steve'})
-  // this.props.albums.push({_id: '789', name: 'alex'})
-console.log(this.props.albums)
-console.log(this.props.tracks)
+    componentWillMount() {
+        console.log('__DASHBOARD__: component will mount');
+        this.props.breedsGet();
+        this.props.dogsGet();
+    }
 
-  }
+    render() {
+        return (
+            <section>
+                <h1>Dog List</h1>
 
+                <BreedForm
+                    buttonText='create'
+                    onComplete={this.props.breedCreate} />
 
-  render() {
-    return (
-      <div className="dashboard-container">
-        <h1>Hello world - music things</h1>
-        <h3>albums!</h3>
-         {this.props.albums ?
-          this.props.albums.map(album =>
-            <div key={album._id}>
-              { <span onClick={() => this.props.deleteAlbum(album)}>x</span> }
-              <p>{album.name}</p>
-            </div>)
-          :
-          undefined
-        }
-      </div>
-    )
-  }
+                <ul>
+                    {this.props.breeds ?
+                        this.props.breeds.map(breedItem => {
+                            return <breedItem
+                                key={breedItem._id}
+                                breedItem={breedItem}
+                                dogs={breedItem.dogs}
+                                onClick={this.props.breedDelete} />;
+                        })
+                        :
+                        undefined
+                    }
+                </ul>
+            </section>
+        );
+    }
 }
 
-let mapStateToProps = state => ({
-  albums: state.albums,
-  tracks: state.tracks
-})
+const mapStateToProps = state => ({
+    breeds: state.breeds,
+    dogs: state.dogs,
+});
 
-let mapDispatchToProps = dispatch => ({
-  fetchAlbums: () => dispatch(albumFetchRequest()),
-  createAlbum: album => dispatch(albumCreateRequest(album)),
-  // deleteAlbum: album => dispatch(albumDeleteRequest(album)),
-  fetchTracks: () => dispatch(trackFetchRequest()),
-  createTrack: track => dispatch(trackCreateRequest(track)),
+const mapDispatchToProps = (dispatch, getState) => ({
+    breedsGet: () => dispatch(breedFetchRequest()),
+    dogsGet: () => dispatch(dogFetchRequest()),
+    breedCreate: breed => dispatch(breedCreateRequest(breed)),
+    breedDelete: breed => dispatch(breedDeleteRequest(breed)),
+});
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
